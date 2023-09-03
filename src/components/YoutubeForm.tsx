@@ -28,7 +28,7 @@ export function YoutubeForm() {
     watch,
     getValues,
     setValue,
-    formState: { errors },
+    formState: { errors, touchedFields, dirtyFields, isDirty },
   } = useForm<FormValues>({
     defaultValues: {
       username: "",
@@ -66,6 +66,8 @@ export function YoutubeForm() {
   const onSubmit = (data: FormValues) => {
     console.log({ data });
   };
+
+  console.log({ touchedFields, dirtyFields, isDirty });
 
   return (
     <div className="container flex flex-col gap-10 items-center">
