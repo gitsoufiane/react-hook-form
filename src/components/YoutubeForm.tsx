@@ -68,6 +68,14 @@ export function YoutubeForm() {
                   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                 message: "Invalid email",
               },
+              validate: {
+                isAdmin: (fieldValue) =>
+                  fieldValue !== "admin@admin.com" ||
+                  "Enter a different email address",
+                notBlackListed: (fieldValue) =>
+                  !fieldValue.endsWith("baddomaine.com") ||
+                  "this domain is not supported",
+              },
             })}
           />
           <p className="text-red-500 text-xs italic">{errors.email?.message}</p>
@@ -84,7 +92,14 @@ export function YoutubeForm() {
             type="text"
             id="channel"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            {...register("channel")}
+            {...register("channel", {
+              required: {
+                value: true,
+                message: "Channel is Required",
+              },
+              validate: (fieldValue) =>
+                Number(fieldValue) >= 1 || "Channel should be more than 1",
+            })}
           />
           <p className="text-red-500 text-xs italic">
             {errors.channel?.message}
