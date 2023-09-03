@@ -30,6 +30,7 @@ export function YoutubeForm() {
     getValues,
     setValue,
     reset,
+    trigger,
     formState: {
       errors,
       touchedFields,
@@ -305,6 +306,12 @@ export function YoutubeForm() {
           </div>
         </div>
         <div className="flex flex-row gap-10">
+          <button
+            className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
+            onClick={() => trigger()}
+          >
+            Validate
+          </button>
           <button
             className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
             onClick={() => reset()}
