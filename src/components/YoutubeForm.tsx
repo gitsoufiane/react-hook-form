@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 let renderCount = 0;
@@ -12,8 +12,13 @@ type FormValues = {
     facebook: string;
   };
   phoneNumbers: string[];
+  phnumbers: {
+    number: string;
+  }[];
 };
 export function YoutubeForm() {
+  renderCount++;
+
   const {
     register,
     control,
@@ -29,6 +34,7 @@ export function YoutubeForm() {
         facebook: "",
       },
       phoneNumbers: ["", ""],
+      phnumbers: [{ number: "" }],
     },
     //! for Async Default data
     // defaultValues: async () => {
@@ -43,7 +49,11 @@ export function YoutubeForm() {
     //   };
     // },
   });
-  renderCount++;
+
+  const { fields, append, remove } = useFieldArray({
+    name: "phnumbers",
+    control: control,
+  });
 
   const onSubmit = (data: FormValues) => {
     console.log({ data });
@@ -187,6 +197,37 @@ export function YoutubeForm() {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             {...register("phoneNumbers.1")}
           />
+        </div>
+
+        <div>
+          <label htmlFor="">List of phone numbers</label>
+          <button
+            className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-10"
+            onClick={() => append({ number: "" })}
+          >
+            Add phone Number
+          </button>
+          <div>
+            {fields.map((field, index) => {
+              return (
+                <div key={field.id} className="flex gap-10">
+                  <input
+                    type="text"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    {...register(`phnumbers.${index}.number`)}
+                  />
+                  {index > 0 ? (
+                    <button
+                      className="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
+                      onClick={() => remove(index)}
+                    >
+                      Remove phone Number
+                    </button>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">
