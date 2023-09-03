@@ -11,6 +11,8 @@ type FormValues = {
     twitter: string;
     facebook: string;
   };
+  age: number;
+  birthDate: Date;
   phoneNumbers: string[];
   phnumbers: {
     number: string;
@@ -29,6 +31,8 @@ export function YoutubeForm() {
       username: "",
       email: "",
       channel: "",
+      age: 0,
+      birthDate: new Date(),
       social: {
         twitter: "",
         facebook: "",
@@ -144,6 +148,38 @@ export function YoutubeForm() {
         </div>
         <div>
           <label
+            htmlFor="age"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Age
+          </label>
+          <input
+            type="number"
+            id="age"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            {...register("age", {
+              valueAsNumber: true,
+            })}
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="birthDate"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Age
+          </label>
+          <input
+            type="date"
+            id="birthDate"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            {...register("birthDate", {
+              valueAsDate: true,
+            })}
+          />
+        </div>
+        <div>
+          <label
             htmlFor="twitter"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
@@ -202,7 +238,7 @@ export function YoutubeForm() {
         <div>
           <label htmlFor="">List of phone numbers</label>
           <button
-            className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-10"
+            className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-10"
             onClick={() => append({ number: "" })}
           >
             Add phone Number
@@ -218,7 +254,7 @@ export function YoutubeForm() {
                   />
                   {index > 0 ? (
                     <button
-                      className="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
+                      className="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-5"
                       onClick={() => remove(index)}
                     >
                       Remove phone Number
