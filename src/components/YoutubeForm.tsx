@@ -28,7 +28,7 @@ export function YoutubeForm() {
     watch,
     getValues,
     setValue,
-    formState: { errors, touchedFields, dirtyFields, isDirty },
+    formState: { errors, touchedFields, dirtyFields, isDirty, isValid },
   } = useForm<FormValues>({
     defaultValues: {
       username: "",
@@ -70,7 +70,7 @@ export function YoutubeForm() {
     console.log(errors);
   };
 
-  console.log({ touchedFields, dirtyFields, isDirty });
+  console.log({ touchedFields, dirtyFields, isDirty, isValid });
 
   return (
     <div className="container flex flex-col gap-10 items-center">
@@ -297,7 +297,10 @@ export function YoutubeForm() {
           SetValue
         </button>
 
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
+          disabled={!isDirty || !isValid}
+        >
           Submit
         </button>
       </form>
