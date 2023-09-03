@@ -11,6 +11,7 @@ type FormValues = {
     twitter: string;
     facebook: string;
   };
+  phoneNumbers: string[];
 };
 export function YoutubeForm() {
   const {
@@ -27,6 +28,7 @@ export function YoutubeForm() {
         twitter: "",
         facebook: "",
       },
+      phoneNumbers: ["", ""],
     },
     //! for Async Default data
     // defaultValues: async () => {
@@ -156,6 +158,34 @@ export function YoutubeForm() {
             id="facebook"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             {...register("social.facebook")}
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="primary-phone"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            primary phone
+          </label>
+          <input
+            type="text"
+            id="primary-phone"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            {...register("phoneNumbers.0")}
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="secondary-phone"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            secondary phone
+          </label>
+          <input
+            type="text"
+            id="secondary-phone"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            {...register("phoneNumbers.1")}
           />
         </div>
 
