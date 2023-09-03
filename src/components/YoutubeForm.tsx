@@ -27,6 +27,7 @@ export function YoutubeForm() {
     handleSubmit,
     watch,
     getValues,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -275,6 +276,18 @@ export function YoutubeForm() {
           onClick={() => console.log(getValues())}
         >
           GetValues
+        </button>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
+          onClick={() => {
+            setValue("username", "Codevolution", {
+              shouldDirty: true,
+              shouldTouch: true,
+              shouldValidate: true,
+            });
+          }}
+        >
+          SetValue
         </button>
 
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">
