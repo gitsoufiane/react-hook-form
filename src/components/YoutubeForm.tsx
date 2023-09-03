@@ -25,6 +25,7 @@ export function YoutubeForm() {
     register,
     control,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -53,6 +54,7 @@ export function YoutubeForm() {
     //   };
     // },
   });
+  const watchValue = watch();
 
   const { fields, append, remove } = useFieldArray({
     name: "phnumbers",
@@ -66,6 +68,7 @@ export function YoutubeForm() {
   return (
     <div className="container flex flex-col gap-10 items-center">
       <h1 className="text-lg">YouTube Form --- render ({renderCount})</h1>
+      <span>{JSON.stringify(watchValue)}</span>
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
@@ -89,6 +92,7 @@ export function YoutubeForm() {
               },
             })}
           />
+
           <p className="text-red-500 text-xs italic">
             {errors.username?.message}
           </p>
