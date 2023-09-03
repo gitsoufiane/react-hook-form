@@ -7,6 +7,10 @@ type FormValues = {
   username: string;
   email: string;
   channel: string;
+  social: {
+    twitter: string;
+    facebook: string;
+  };
 };
 export function YoutubeForm() {
   const {
@@ -16,9 +20,13 @@ export function YoutubeForm() {
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
-      username: "soufiane",
-      email: "soufiane@email.com",
-      channel: "10",
+      username: "",
+      email: "",
+      channel: "",
+      social: {
+        twitter: "",
+        facebook: "",
+      },
     },
     //! for Async Default data
     // defaultValues: async () => {
@@ -99,7 +107,6 @@ export function YoutubeForm() {
           <p className="text-red-500 text-xs italic">{errors.email?.message}</p>
         </div>
         <div>
-          {" "}
           <label
             htmlFor="channel"
             className="block text-gray-700 text-sm font-bold mb-2"
@@ -122,6 +129,34 @@ export function YoutubeForm() {
           <p className="text-red-500 text-xs italic">
             {errors.channel?.message}
           </p>
+        </div>
+        <div>
+          <label
+            htmlFor="twitter"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Twitter
+          </label>
+          <input
+            type="text"
+            id="twitter"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            {...register("social.twitter")}
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="facebook"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            facebook
+          </label>
+          <input
+            type="text"
+            id="facebook"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            {...register("social.facebook")}
+          />
         </div>
 
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">
