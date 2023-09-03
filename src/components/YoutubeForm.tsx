@@ -145,6 +145,14 @@ export function YoutubeForm() {
                 notBlackListed: (fieldValue) =>
                   !fieldValue.endsWith("baddomaine.com") ||
                   "this domain is not supported",
+                emailAvailable: async (fieldValue) => {
+                  const response = await fetch(
+                    `https://jsonplaceholder.typicode.com/users?email=${fieldValue}`
+                  );
+                  const data = await response.json();
+                  console.log({ data });
+                  return data.length == 0 || "Email Already Exist";
+                },
               },
             })}
           />
@@ -323,7 +331,7 @@ export function YoutubeForm() {
 
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
-            disabled={!isDirty || !isValid}
+            // disabled={!isDirty || !isValid}
           >
             Submit
           </button>
