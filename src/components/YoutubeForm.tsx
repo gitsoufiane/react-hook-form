@@ -42,6 +42,7 @@ export function YoutubeForm() {
       submitCount,
     },
   } = useForm<FormValues>({
+    mode: "onChange",
     defaultValues: {
       username: "",
       email: "",
