@@ -1,4 +1,4 @@
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, FieldErrors } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 let renderCount = 0;
@@ -66,6 +66,9 @@ export function YoutubeForm() {
   const onSubmit = (data: FormValues) => {
     console.log({ data });
   };
+  const onError = (errors: FieldErrors<FormValues>) => {
+    console.log(errors);
+  };
 
   console.log({ touchedFields, dirtyFields, isDirty });
 
@@ -74,7 +77,7 @@ export function YoutubeForm() {
       <h1 className="text-lg">YouTube Form --- render ({renderCount})</h1>
       <span>{JSON.stringify(watchValue)}</span>
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmit, onError)}
         noValidate
         className="flex flex-col gap-10"
       >
