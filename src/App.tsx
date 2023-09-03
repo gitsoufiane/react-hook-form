@@ -1,5 +1,10 @@
+import { YoutubeForm } from "./components/YoutubeForm";
 function App() {
-  return <main></main>;
+  return (
+    <main>
+      <YoutubeForm />
+    </main>
+  );
 }
 
 export default App;
