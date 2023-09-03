@@ -1,5 +1,6 @@
 import { useForm, useFieldArray, FieldErrors } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
+import { useEffect } from "react";
 
 let renderCount = 0;
 
@@ -80,6 +81,10 @@ export function YoutubeForm() {
   const onError = (errors: FieldErrors<FormValues>) => {
     console.log(errors);
   };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) reset();
+  }, [isSubmitSuccessful, reset]);
 
   console.log({ touchedFields, dirtyFields, isDirty, isValid });
   console.log({ isSubmitting, isSubmitSuccessful, isSubmitted, submitCount });
