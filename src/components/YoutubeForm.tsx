@@ -28,7 +28,17 @@ export function YoutubeForm() {
     watch,
     getValues,
     setValue,
-    formState: { errors, touchedFields, dirtyFields, isDirty, isValid },
+    formState: {
+      errors,
+      touchedFields,
+      dirtyFields,
+      isDirty,
+      isValid,
+      isSubmitting,
+      isSubmitted,
+      isSubmitSuccessful,
+      submitCount,
+    },
   } = useForm<FormValues>({
     defaultValues: {
       username: "",
@@ -71,6 +81,7 @@ export function YoutubeForm() {
   };
 
   console.log({ touchedFields, dirtyFields, isDirty, isValid });
+  console.log({ isSubmitting, isSubmitSuccessful, isSubmitted, submitCount });
 
   return (
     <div className="container flex flex-col gap-10 items-center">
@@ -278,31 +289,33 @@ export function YoutubeForm() {
             })}
           </div>
         </div>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
-          onClick={() => console.log(getValues())}
-        >
-          GetValues
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
-          onClick={() => {
-            setValue("username", "Codevolution", {
-              shouldDirty: true,
-              shouldTouch: true,
-              shouldValidate: true,
-            });
-          }}
-        >
-          SetValue
-        </button>
+        <div className="flex flex-row gap-10">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
+            onClick={() => console.log(getValues())}
+          >
+            GetValues
+          </button>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
+            onClick={() => {
+              setValue("username", "Codevolution", {
+                shouldDirty: true,
+                shouldTouch: true,
+                shouldValidate: true,
+              });
+            }}
+          >
+            SetValue
+          </button>
 
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
-          disabled={!isDirty || !isValid}
-        >
-          Submit
-        </button>
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
+            disabled={!isDirty || !isValid}
+          >
+            Submit
+          </button>
+        </div>
       </form>
       <DevTool control={control} />
     </div>
